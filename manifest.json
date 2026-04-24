@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Proxy simple",
+  "version": "1.0",
+  "permissions": ["proxy", "storage", "contextMenus"],
+  "action": {
+    "default_title": "On/Off proxy | Options"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  }
+}

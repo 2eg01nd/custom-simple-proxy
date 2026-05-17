@@ -8,12 +8,17 @@ const applyProxy = () => {
           bypassList: ["localhost", "127.0.0.1"]
         }
       };
-      chrome.proxy.settings.set({ value: config, scope: 'regular' });
-      chrome.action.setBadgeText({ text: "ON" });
-      chrome.action.setBadgeBackgroundColor({ color: "#4CAF50" });
+      chrome.proxy.settings.set({ value: config, scope: 'regular' }, () => {
+        chrome.action.setBadgeText({ text: "ON" });
+        chrome.action.setBadgeBackgroundColor({ color: "#4CAF50" });
+      });
     } else {
-      chrome.proxy.settings.clear({ scope: 'regular' });
-      chrome.action.setBadgeText({ text: "" });
+      const config = { mode: "system" };
+
+      chrome.proxy.settings.set({ value: config, scope: 'regular' }, () => {
+        chrome.proxy.settings.clear({ scope: 'regular' });
+        chrome.action.setBadgeText({ text: "" });
+      });
     }
   });
 };
